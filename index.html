@@ -68,71 +68,89 @@
 
 <script>
 const DAYS=[{date:'7/1',label:'第一天'},{date:'7/2',label:'第二天'},{date:'7/3',label:'第三天'},{date:'7/4',label:'第四天'},{date:'7/5',label:'第五天'},{date:'7/6',label:'第六天'}];
-const LABELS={sight:'景點',food:'美食',hotel:'住宿',transport:'交通'},TYPE={sight:'sight',food:'food',hotel:'hotel',transport:'transport'},RATE=['','一般','還行','不錯','很棒！','完美！'];
-let data={0:[],1:[],2:[],3:[],4:[],5:[]},currentDay=0,currentRating=0,pendingPhotos=[],editingId=null,pendingDeleteId=null,sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';
+const LABELS={sight:'景點',food:'美食',hotel:'住宿',transport:'交通'};
+const TYPE={sight:'sight',food:'food',hotel:'hotel',transport:'transport'};
+const RATE=['','一般','還行','不錯','很棒！','完美！'];
+const el={
+  tabs:document.getElementById('tabs'),main:document.getElementById('main'),
+  entryModal:document.getElementById('entryModal'),syncModal:document.getElementById('syncModal'),
+  modalTitle:document.getElementById('modalTitle'),stars:document.getElementById('stars'),
+  fType:document.getElementById('fType'),fName:document.getElementById('fName'),fLocation:document.getElementById('fLocation'),fTime:document.getElementById('fTime'),fNote:document.getElementById('fNote'),
+  fExpenseAmount:document.getElementById('fExpenseAmount'),fExpenseCurrency:document.getElementById('fExpenseCurrency'),fExpenseNote:document.getElementById('fExpenseNote'),
+  fOrigin:document.getElementById('fOrigin'),fDestination:document.getElementById('fDestination'),fTransitMode:document.getElementById('fTransitMode'),fDuration:document.getElementById('fDuration'),
+  routeFields:document.getElementById('routeFields'),preview:document.getElementById('preview'),
+  lightbox:document.getElementById('lightbox'),lightboxImg:document.getElementById('lightboxImg'),
+  totalEntries:document.getElementById('totalEntries'),totalPhotos:document.getElementById('totalPhotos'),avgRating:document.getElementById('avgRating'),daysLogged:document.getElementById('daysLogged'),totalExpense:document.getElementById('totalExpense'),
+  sheetUrl:document.getElementById('sheetUrl'),syncStatus:document.getElementById('syncStatus')
+};
+let data={0:[],1:[],2:[],3:[],4:[],5:[]};
+let currentDay=0,currentRating=0,pendingPhotos=[],editingId=null,pendingDeleteId=null,sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';
 try{const saved=localStorage.getItem('tkDiary26');if(saved)data=JSON.parse(saved)}catch(e){}
 function save(){localStorage.setItem('tkDiary26',JSON.stringify(data))}
-function tabs(){tabsEl().innerHTML=DAYS.map((d,i)=>`<button class="tab ${i===currentDay?'active':''}" onclick="switchDay(${i})">${d.date} ${d.label}</button>`).join('')}
-function tabsEl(){return document.getElementById('tabs')}
+function tabs(){el.tabs.innerHTML=DAYS.map(function(d,i){return `<button class="tab ${i===currentDay?'active':''}" onclick="switchDay(${i})">${d.date} ${d.label}</button>`}).join('')}
 function switchDay(i){currentDay=i;pendingDeleteId=null;tabs();render()}
 function render(){
- const d=DAYS[currentDay],entries=data[currentDay]||[],photos=entries.reduce((s,e)=>s+(e.photos?.length||0),0),rated=entries.filter(e=>e.rating>0),avg=rated.length?rated.reduce((s,e)=>s+e.rating,0)/rated.length:0,exp=sumExpenses(entries);
+ const d=DAYS[currentDay],entries=data[currentDay]||[];
+ const photos=entries.reduce(function(s,e){return s+((e.photos&&e.photos.length)||0)},0);
+ const rated=entries.filter(function(e){return e.rating>0});
+ const avg=rated.length?rated.reduce(function(s,e){return s+e.rating},0)/rated.length:0;
+ const exp=sumExpenses(entries);
  let html=`<div class="dayhead"><div class="dayinfo"><div class="daynum">${d.date}</div><div class="daydate">2026年7月${d.date.split('/')[1]}日</div><div class="daylabel">${d.label}</div></div><button class="add" onclick="openEntry()"><i class="ti ti-plus"></i>新增記錄</button></div>`;
  if(entries.length)html+=`<div class="summary"><div class="sum"><b>${entries.length}</b><span>記錄總數</span></div><div class="sum"><b>${photos}</b><span>照片張數</span></div><div class="sum"><b>${avg?avg.toFixed(1)+'★':'—'}</b><span>平均評分</span></div><div class="sum"><b>${expenseSummary(exp)}</b><span>今日花費</span></div></div>`;
  html+=`<div class="list">${entries.length?entries.map(card).join(''):`<div class="empty"><i class="ti ti-torii-gate empty-icon"></i><div>今日尚無記錄，開始記錄你的東京回憶吧</div></div>`}</div>`;
- main.innerHTML=html;stats();
+ el.main.innerHTML=html;stats();
 }
 function card(e){
- const stars='★'.repeat(e.rating||0)+'☆'.repeat(5-(e.rating||0)),photos=(e.photos||[]).map(p=>`<img class="photo" src="${p}" onclick="openLightbox('${p}')">`).join('');
+ const stars='★'.repeat(e.rating||0)+'☆'.repeat(5-(e.rating||0));
+ const photos=(e.photos||[]).map(function(p){return `<img class="photo" src="${p}" onclick="openLightbox('${p}')">`}).join('');
  return `<article class="card"><div class="cardtop"><div><span class="badge ${TYPE[e.type]||''}"><i class="ti ti-${icon(e.type)}"></i>${LABELS[e.type]||e.type}</span>${e.location?` <span class="time"><i class="ti ti-map-pin"></i> ${e.location}</span>`:''}</div><span class="time">${e.time||''}</span></div><div class="body"><div class="name">${e.name||'（未命名）'}</div>${e.rating?`<div class="stars">${stars} <span class="time">${RATE[e.rating]}</span></div>`:''}${e.note?`<div class="note">${e.note}</div>`:''}${expenseHtml(e)}${routeHtml(e)}${photos?`<div class="photos">${photos}</div>`:''}</div><div class="actions"><button class="act" onclick="editEntry('${e.id}')"><i class="ti ti-pencil"></i>編輯</button>${pendingDeleteId===e.id?`<button class="act del" onclick="deleteEntry('${e.id}')"><i class="ti ti-check"></i>確認刪除</button>`:`<button class="act del" onclick="requestDelete('${e.id}')"><i class="ti ti-trash"></i>刪除</button>`}</div></article>`;
 }
 function icon(t){return {sight:'torii-gate',food:'bowl-chopsticks',hotel:'building',transport:'train'}[t]||'map-pin'}
 function expenseHtml(e){return e.expense&&Number(e.expense.amount)?`<div class="expense"><i class="ti ti-receipt"></i> <b>${money(e.expense.amount,e.expense.currency)}</b>${e.expense.note?`<div>${e.expense.note}</div>`:''}</div>`:''}
 function routeHtml(e){if(!e.route||(!e.route.origin&&!e.route.destination&&!e.route.duration))return '';const label={transit:'大眾運輸',walking:'步行',driving:'開車／計程車',bicycling:'自行車'}[e.route.mode]||'交通',url=mapUrl(e.route);return `<div class="route"><div><i class="ti ti-route"></i> ${e.route.origin||'未填出發地'} → ${e.route.destination||'未填目的地'}</div><div>${label}${e.route.duration?' · '+e.route.duration:''}</div>${url?`<a href="${url}" target="_blank" rel="noopener"><i class="ti ti-map-2"></i>開啟 Google Maps 路線</a>`:''}</div>`}
 function mapUrl(r){if(!r.origin&&!r.destination)return '';const p=new URLSearchParams({api:'1'});if(r.origin)p.set('origin',r.origin);if(r.destination)p.set('destination',r.destination);if(r.mode)p.set('travelmode',r.mode);return `https://www.google.com/maps/dir/?${p}`}
-function openEntry(entry=null){
- editingId=entry?.id||null;currentRating=Number(entry?.rating||0);pendingPhotos=[...(entry?.photos||[])];modalTitle.textContent=entry?'編輯記錄':'新增記錄';
- fType.value=entry?.type||'sight';fName.value=entry?.name||'';fLocation.value=entry?.location||'';fTime.value=entry?.time||'';fNote.value=entry?.note||'';
- fExpenseAmount.value=entry?.expense?.amount||'';fExpenseCurrency.value=entry?.expense?.currency||'JPY';fExpenseNote.value=entry?.expense?.note||'';
- fOrigin.value=entry?.route?.origin||'';fDestination.value=entry?.route?.destination||'';fTransitMode.value=entry?.route?.mode||'transit';fDuration.value=entry?.route?.duration||'';
- previewPhotos();markStars();toggleRoute();entryModal.classList.remove('hidden');
+function openEntry(entry){
+ entry=entry||null;editingId=entry?entry.id:null;currentRating=Number(entry?entry.rating||0:0);pendingPhotos=entry&&entry.photos?[].concat(entry.photos):[];el.modalTitle.textContent=entry?'編輯記錄':'新增記錄';
+ el.fType.value=entry?entry.type||'sight':'sight';el.fName.value=entry?entry.name||'':'';el.fLocation.value=entry?entry.location||'':'';el.fTime.value=entry?entry.time||'':'';el.fNote.value=entry?entry.note||'':'';
+ el.fExpenseAmount.value=entry&&entry.expense?entry.expense.amount||'':'';el.fExpenseCurrency.value=entry&&entry.expense?entry.expense.currency||'JPY':'JPY';el.fExpenseNote.value=entry&&entry.expense?entry.expense.note||'':'';
+ el.fOrigin.value=entry&&entry.route?entry.route.origin||'':'';el.fDestination.value=entry&&entry.route?entry.route.destination||'':'';el.fTransitMode.value=entry&&entry.route?entry.route.mode||'transit':'transit';el.fDuration.value=entry&&entry.route?entry.route.duration||'':'';
+ previewPhotos();markStars();toggleRoute();el.entryModal.classList.remove('hidden');
 }
-function closeEntry(){entryModal.classList.add('hidden');editingId=null}
-function editEntry(id){pendingDeleteId=null;const e=(data[currentDay]||[]).find(x=>x.id===id);if(e)openEntry(e)}
-function toggleRoute(){routeFields.classList.toggle('active',fType.value==='transport')}
-function markStars(){document.querySelectorAll('.pick').forEach(s=>s.classList.toggle('sel',Number(s.dataset.v)<=currentRating))}
-stars.addEventListener('click',e=>{if(e.target.dataset.v){currentRating=Number(e.target.dataset.v);markStars()}});
-stars.addEventListener('mouseover',e=>{if(e.target.dataset.v)document.querySelectorAll('.pick').forEach(s=>s.classList.toggle('hover',Number(s.dataset.v)<=Number(e.target.dataset.v)))});
-stars.addEventListener('mouseleave',()=>document.querySelectorAll('.pick').forEach(s=>s.classList.remove('hover')));
-fType.addEventListener('change',toggleRoute);
-function handlePhotos(ev){[...ev.target.files].forEach(f=>{const r=new FileReader();r.onload=e=>{pendingPhotos.push(e.target.result);previewPhotos()};r.readAsDataURL(f)});ev.target.value=''}
-function previewPhotos(){preview.innerHTML='';pendingPhotos.forEach((src,i)=>{const img=document.createElement('img');img.src=src;img.className='preview';img.title='點擊移除照片';img.onclick=()=>{pendingPhotos.splice(i,1);previewPhotos()};preview.appendChild(img)})}
+function closeEntry(){el.entryModal.classList.add('hidden');editingId=null}
+function editEntry(id){pendingDeleteId=null;const e=(data[currentDay]||[]).find(function(x){return x.id===id});if(e)openEntry(e)}
+function toggleRoute(){el.routeFields.classList.toggle('active',el.fType.value==='transport')}
+function markStars(){document.querySelectorAll('.pick').forEach(function(s){s.classList.toggle('sel',Number(s.dataset.v)<=currentRating)})}
+el.stars.addEventListener('click',function(e){if(e.target.dataset.v){currentRating=Number(e.target.dataset.v);markStars()}});
+el.stars.addEventListener('mouseover',function(e){if(e.target.dataset.v)document.querySelectorAll('.pick').forEach(function(s){s.classList.toggle('hover',Number(s.dataset.v)<=Number(e.target.dataset.v))})});
+el.stars.addEventListener('mouseleave',function(){document.querySelectorAll('.pick').forEach(function(s){s.classList.remove('hover')})});
+el.fType.addEventListener('change',toggleRoute);
+function handlePhotos(ev){Array.prototype.slice.call(ev.target.files).forEach(function(f){const r=new FileReader();r.onload=function(e){pendingPhotos.push(e.target.result);previewPhotos()};r.readAsDataURL(f)});ev.target.value=''}
+function previewPhotos(){el.preview.innerHTML='';pendingPhotos.forEach(function(src,i){const img=document.createElement('img');img.src=src;img.className='preview';img.title='點擊移除照片';img.onclick=function(){pendingPhotos.splice(i,1);previewPhotos()};el.preview.appendChild(img)})}
 function submitEntry(){
- const name=fName.value.trim();if(!name){alert('請輸入名稱');return}
- const amount=Number(fExpenseAmount.value||0),existing=editingId?(data[currentDay]||[]).find(e=>e.id===editingId):null;
- const entry={id:existing?existing.id:'e'+Date.now(),type:fType.value,name,location:fLocation.value.trim(),time:fTime.value,note:fNote.value.trim(),rating:currentRating,photos:[...pendingPhotos],expense:amount>0?{amount,currency:fExpenseCurrency.value,note:fExpenseNote.value.trim()}:null,route:fType.value==='transport'?{origin:fOrigin.value.trim(),destination:fDestination.value.trim(),mode:fTransitMode.value,duration:fDuration.value.trim()}:null,ts:existing?existing.ts:Date.now(),editedTs:existing?Date.now():undefined};
- if(existing)data[currentDay][data[currentDay].findIndex(e=>e.id===editingId)]=entry;else data[currentDay].push(entry);
+ const name=el.fName.value.trim();if(!name){alert('請輸入名稱');return}
+ const amount=Number(el.fExpenseAmount.value||0),existing=editingId?(data[currentDay]||[]).find(function(e){return e.id===editingId}):null;
+ const entry={id:existing?existing.id:'e'+Date.now(),type:el.fType.value,name:name,location:el.fLocation.value.trim(),time:el.fTime.value,note:el.fNote.value.trim(),rating:currentRating,photos:[].concat(pendingPhotos),expense:amount>0?{amount:amount,currency:el.fExpenseCurrency.value,note:el.fExpenseNote.value.trim()}:null,route:el.fType.value==='transport'?{origin:el.fOrigin.value.trim(),destination:el.fDestination.value.trim(),mode:el.fTransitMode.value,duration:el.fDuration.value.trim()}:null,ts:existing?existing.ts:Date.now(),editedTs:existing?Date.now():undefined};
+ if(existing)data[currentDay][data[currentDay].findIndex(function(e){return e.id===editingId})]=entry;else data[currentDay].push(entry);
  pendingDeleteId=null;save();closeEntry();render();
 }
 function requestDelete(id){pendingDeleteId=pendingDeleteId===id?null:id;render()}
-function deleteEntry(id){data[currentDay]=data[currentDay].filter(e=>e.id!==id);pendingDeleteId=null;save();render()}
-function openLightbox(src){lightboxImg.src=src;lightbox.classList.remove('hidden')}
-function stats(){let total=0,photos=0,rs=0,rc=0,days=0,exp={JPY:0,TWD:0};Object.values(data).forEach(list=>{if(list.length)days++;list.forEach(e=>{total++;photos+=e.photos?.length||0;if(e.rating){rs+=e.rating;rc++}addExpense(exp,e.expense)})});totalEntries.textContent=total;totalPhotos.textContent=photos;avgRating.textContent=rc?(rs/rc).toFixed(1)+'★':'—';daysLogged.textContent=days;totalExpense.textContent=expenseSummary(exp)}
+function deleteEntry(id){data[currentDay]=data[currentDay].filter(function(e){return e.id!==id});pendingDeleteId=null;save();render()}
+function openLightbox(src){el.lightboxImg.src=src;el.lightbox.classList.remove('hidden')}
+function stats(){let total=0,photos=0,rs=0,rc=0,days=0,exp={JPY:0,TWD:0};Object.values(data).forEach(function(list){if(list.length)days++;list.forEach(function(e){total++;photos+=(e.photos&&e.photos.length)||0;if(e.rating){rs+=e.rating;rc++}addExpense(exp,e.expense)})});el.totalEntries.textContent=total;el.totalPhotos.textContent=photos;el.avgRating.textContent=rc?(rs/rc).toFixed(1)+'★':'—';el.daysLogged.textContent=days;el.totalExpense.textContent=expenseSummary(exp)}
 function addExpense(t,e){if(e&&Number(e.amount)){const c=e.currency||'JPY';t[c]=(t[c]||0)+Number(e.amount)}}
-function sumExpenses(list){const t={JPY:0,TWD:0};list.forEach(e=>addExpense(t,e.expense));return t}
+function sumExpenses(list){const t={JPY:0,TWD:0};list.forEach(function(e){addExpense(t,e.expense)});return t}
 function money(n,c){return c==='TWD'?`NT$${Number(n).toLocaleString('zh-TW')}`:`¥${Number(n).toLocaleString('ja-JP')}`}
 function expenseSummary(t){const a=[];if(t.JPY)a.push(money(t.JPY,'JPY'));if(t.TWD)a.push(money(t.TWD,'TWD'));return a.join(' / ')||'¥0'}
 function exportPdf(){window.print()}
-function openSync(){sheetUrlInput().value=sheetUrl;setStatus('貼上 Google Apps Script 部署後的 Web App URL，即可同步資料。');syncModal.classList.remove('hidden')}
-function closeSync(){syncModal.classList.add('hidden')}
-function sheetUrlInput(){return document.getElementById('sheetUrl')}
-function setStatus(t){syncStatus.textContent=t}
-function saveSheetUrl(){sheetUrl=sheetUrlInput().value.trim();localStorage.setItem('tkDiary26SheetUrl',sheetUrl);setStatus(sheetUrl?'同步網址已儲存。':'同步網址已清除。')}
+function openSync(){el.sheetUrl.value=sheetUrl;setStatus('貼上 Google Apps Script 部署後的 Web App URL，即可同步資料。');el.syncModal.classList.remove('hidden')}
+function closeSync(){el.syncModal.classList.add('hidden')}
+function setStatus(t){el.syncStatus.textContent=t}
+function saveSheetUrl(){sheetUrl=el.sheetUrl.value.trim();localStorage.setItem('tkDiary26SheetUrl',sheetUrl);setStatus(sheetUrl?'同步網址已儲存。':'同步網址已清除。')}
 function needUrl(){if(!sheetUrl)sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';if(!sheetUrl){openSync();setStatus('請先貼上 Apps Script Web App URL。');return ''}return sheetUrl}
-function payload(){return {version:1,updatedAt:new Date().toISOString(),days:DAYS,data}}
+function payload(){return {version:1,updatedAt:new Date().toISOString(),days:DAYS,data:data}}
 async function syncToSheets(){const url=needUrl();if(!url)return;setStatus('正在上傳資料到 Google Sheets...');try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'save',payload:payload()})});setStatus(await r.text()||'上傳完成。')}catch(e){setStatus('上傳失敗。請確認 Apps Script URL 已部署為任何人皆可存取。')}}
 async function loadFromSheets(){const url=needUrl();if(!url)return;setStatus('正在從 Google Sheets 下載資料...');try{const r=await fetch(url+'?action=load&ts='+Date.now()),j=await r.json(),p=j.payload||j;if(p&&p.data){data=p.data;save();tabs();render();setStatus('已從 Google Sheets 下載並更新畫面。')}else setStatus('Sheets 裡沒有可匯入的日記資料。')}catch(e){setStatus('下載失敗。請確認 Apps Script URL 與部署權限。')}}
-entryModal.addEventListener('click',e=>{if(e.target===entryModal)closeEntry()});syncModal.addEventListener('click',e=>{if(e.target===syncModal)closeSync()});
+el.entryModal.addEventListener('click',function(e){if(e.target===el.entryModal)closeEntry()});el.syncModal.addEventListener('click',function(e){if(e.target===el.syncModal)closeSync()});
 tabs();render();
 </script>
 </body>
