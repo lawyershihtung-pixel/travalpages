@@ -2,17 +2,267 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="東京日記">
+<meta name="theme-color" content="#1a1410">
 <title>東京六日旅遊日記</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}:root{--ink:#1a1410;--ink2:#4a3f35;--ink3:#776a60;--paper:#fdf8f0;--paper2:#f5ede0;--line:rgba(26,20,16,.14);--red:#b7352a;--teal:#19776c;--gold:#9b6b10}body{font-family:"Noto Sans TC",sans-serif;background:var(--paper);color:var(--ink)}button,input,select,textarea{font:inherit}.header{background:var(--ink);color:var(--paper);padding:28px 20px 18px;position:relative;overflow:hidden}.header:after{content:"東京";position:absolute;right:-18px;top:50%;transform:translateY(-50%);font-family:"Noto Serif TC",serif;font-size:150px;color:rgba(255,255,255,.05);letter-spacing:-8px}.eyebrow{font:11px "Noto Serif TC",serif;letter-spacing:4px;color:rgba(255,255,255,.45);text-transform:uppercase}.title{font:300 26px "Noto Serif TC",serif;letter-spacing:2px;margin-top:5px}.sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:7px}.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}.stat{text-align:center}.stat b{display:block;font:300 21px "Noto Serif TC",serif}.stat span{font-size:10px;color:rgba(255,255,255,.42);letter-spacing:1px}.toolbar{display:flex;gap:8px;overflow:auto;background:#2b221c;padding:10px 14px}.tool,.add,.submit,.act{border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--paper);border-radius:4px;padding:8px 11px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;cursor:pointer;font-size:12px}.tabs{display:flex;overflow:auto;background:var(--ink);padding:0 12px}.tab{flex:0 0 auto;color:rgba(255,255,255,.38);padding:10px 14px;border-bottom:2px solid transparent;font:12px "Noto Serif TC",serif;cursor:pointer}.tab.active{color:var(--paper);border-color:rgba(255,255,255,.55)}main{padding:18px}.dayhead{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:15px}.daynum{font:300 36px "Noto Serif TC",serif}.daydate{font-size:11px;color:var(--ink3);letter-spacing:1px}.daylabel{font:13px "Noto Serif TC",serif;color:var(--ink2)}.add{background:var(--ink);border-color:var(--ink)}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--paper2);border:1px solid var(--line);border-radius:6px;padding:12px;margin-bottom:14px}.sum{text-align:center}.sum b{font:300 20px "Noto Serif TC",serif}.sum span{display:block;font-size:10px;color:var(--ink3)}.list{display:flex;flex-direction:column;gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}.cardtop{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--paper2);border-bottom:1px solid var(--line);padding:12px 14px}.badge{display:inline-flex;align-items:center;gap:4px;border-radius:3px;padding:3px 8px;font:11px "Noto Serif TC",serif}.sight{background:#e8f4f1;color:var(--teal);border:1px solid #b8ddd7}.food{background:#fff1e3;color:#bf552a;border:1px solid #edc99d}.hotel{background:#efe9fb;color:#5b3b95;border:1px solid #c9b8ec}.transport{background:#eee;color:#444;border:1px solid #ccc}.time{font-size:11px;color:var(--ink3)}.body{padding:13px 14px}.name{font:16px "Noto Serif TC",serif;margin-bottom:6px}.note{font-size:13px;color:var(--ink2);line-height:1.7;margin:8px 0}.stars{color:#bf8427;font-size:16px;letter-spacing:1px;margin:6px 0}.photo{width:72px;height:72px;object-fit:cover;border-radius:4px;border:1px solid var(--line);cursor:pointer}.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.expense,.route{margin:10px 0;padding:10px 12px;border-radius:5px;font-size:12px;line-height:1.6}.expense{background:#fff8ea;border:1px solid #efd7a8;color:#684716}.route{background:#f6fbfa;border:1px solid rgba(25,119,108,.2);color:var(--ink2)}.route a{display:inline-flex;margin-top:8px;color:var(--teal);text-decoration:none}.actions{display:flex;justify-content:flex-end;gap:8px;background:var(--paper);border-top:1px solid var(--line);padding:8px 14px}.act{color:var(--ink2);border-color:rgba(26,20,16,.25);padding:6px 10px}.act.del{color:var(--red);border-color:rgba(183,53,42,.35)}.empty{text-align:center;color:var(--ink3);padding:52px 10px}.modalwrap{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:10}.hidden{display:none}.modalwrap.hidden{display:none}.modal{width:100%;max-width:720px;background:var(--paper);border-radius:12px 12px 0 0;max-height:90vh;overflow:auto;padding:22px}.mtitle{display:flex;justify-content:space-between;align-items:center;font:18px "Noto Serif TC",serif;margin-bottom:16px}.x{border:0;background:none;font-size:24px;color:var(--ink3)}.group{margin-bottom:13px}.label{display:block;font-size:11px;color:var(--ink3);letter-spacing:1px;margin-bottom:5px}.input,.select,.textarea{width:100%;border:1px solid rgba(26,20,16,.24);background:#fff;border-radius:4px;padding:9px 11px;color:var(--ink)}.textarea{min-height:76px;resize:vertical;line-height:1.6}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pick{font-size:26px;color:#ddd;cursor:pointer}.pick.sel,.pick.hover{color:#bf8427}.upload{border:1.5px dashed rgba(26,20,16,.25);padding:16px;text-align:center;border-radius:4px;cursor:pointer;color:var(--ink3)}.preview{width:62px;height:62px;object-fit:cover;border:1px solid var(--line);border-radius:4px;cursor:pointer}.routefields{display:none;background:#f6fbfa;border:1px solid rgba(25,119,108,.2);border-radius:5px;padding:12px;margin-bottom:13px}.routefields.active{display:block}.submit{width:100%;justify-content:center;background:var(--ink);border-color:var(--ink);font:14px "Noto Serif TC",serif;margin-top:6px}.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:20;display:flex;align-items:center;justify-content:center}.lightbox.hidden{display:none}.lightbox img{max-width:92%;max-height:92%;object-fit:contain}.status{font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:12px}@media(max-width:560px){.row,.summary{grid-template-columns:1fr 1fr}.stats{gap:12px}.stat b{font-size:18px}}@media print{.toolbar,.tabs,.add,.actions,.modalwrap,.lightbox{display:none!important}body{background:#fff}.header{background:#fff;color:#111;border-bottom:1px solid #ddd;padding:16px 0}.header:after{display:none}.sub,.eyebrow,.stat span{color:#555}.stat b{color:#111}main{padding:0}.card{break-inside:avoid;border-color:#ddd}.cardtop{background:#f6f3ee}}
+/* ── Reset & Variables ── */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --ink:#1a1410;--ink2:#4a3f35;--ink3:#776a60;
+  --paper:#fdf8f0;--paper2:#f5ede0;--line:rgba(26,20,16,.14);
+  --red:#b7352a;--teal:#19776c;--gold:#9b6b10;
+  --safe-top:env(safe-area-inset-top);
+  --safe-bottom:env(safe-area-inset-bottom);
+  --safe-left:env(safe-area-inset-left);
+  --safe-right:env(safe-area-inset-right);
+}
+body{font-family:"Noto Sans TC",sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+
+/* ── Header ── */
+.header{
+  background:var(--ink);color:var(--paper);
+  padding:calc(20px + var(--safe-top)) 20px 18px;
+  position:relative;overflow:hidden;
+}
+.header:after{
+  content:"東京";position:absolute;right:-18px;top:50%;
+  transform:translateY(-50%);font-family:"Noto Serif TC",serif;
+  font-size:150px;color:rgba(255,255,255,.05);letter-spacing:-8px;
+  pointer-events:none;
+}
+.eyebrow{font:11px "Noto Serif TC",serif;letter-spacing:4px;color:rgba(255,255,255,.45);text-transform:uppercase}
+.title{font:300 26px "Noto Serif TC",serif;letter-spacing:2px;margin-top:5px}
+.sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:7px}
+.stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+.stat{text-align:center}
+.stat b{display:block;font:300 21px "Noto Serif TC",serif}
+.stat span{font-size:10px;color:rgba(255,255,255,.42);letter-spacing:1px}
+
+/* ── Toolbar ── */
+.toolbar{
+  display:flex;gap:8px;overflow:auto;background:#2b221c;
+  padding:10px 14px;
+  padding-left:calc(14px + var(--safe-left));
+  padding-right:calc(14px + var(--safe-right));
+  scrollbar-width:none;
+}
+.toolbar::-webkit-scrollbar{display:none}
+.tool,.submit{
+  border:1px solid rgba(255,255,255,.2);background:transparent;
+  color:var(--paper);border-radius:4px;padding:8px 11px;
+  display:inline-flex;align-items:center;gap:6px;
+  white-space:nowrap;cursor:pointer;font-size:12px;
+}
+
+/* ── Tabs ── */
+.tabs{
+  display:flex;overflow:auto;background:var(--ink);
+  padding:0 calc(12px + var(--safe-left));
+  scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;color:rgba(255,255,255,.38);padding:10px 14px;
+  border-bottom:2px solid transparent;font:12px "Noto Serif TC",serif;cursor:pointer;
+}
+.tab.active{color:var(--paper);border-color:rgba(255,255,255,.55)}
+
+/* ── Main Content ── */
+main{
+  padding:18px;
+  padding-left:calc(18px + var(--safe-left));
+  padding-right:calc(18px + var(--safe-right));
+  padding-bottom:calc(90px + var(--safe-bottom));
+}
+
+/* ── Day Header ── */
+.dayhead{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:15px}
+.daynum{font:300 36px "Noto Serif TC",serif}
+.daydate{font-size:11px;color:var(--ink3);letter-spacing:1px}
+.daylabel{font:13px "Noto Serif TC",serif;color:var(--ink2)}
+
+/* ── FAB (Floating Add Button) ── */
+.fab{
+  position:fixed;
+  right:calc(20px + var(--safe-right));
+  bottom:calc(20px + var(--safe-bottom));
+  width:56px;height:56px;border-radius:50%;
+  background:var(--ink);color:var(--paper);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 18px rgba(26,20,16,.38);
+  font-size:26px;z-index:9;
+  transition:transform .15s,box-shadow .15s;
+}
+.fab:active{transform:scale(.93);box-shadow:0 2px 10px rgba(26,20,16,.3)}
+
+/* ── Summary ── */
+.summary{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;background:var(--paper2);border:1px solid var(--line);
+  border-radius:6px;padding:12px;margin-bottom:14px;
+}
+.sum{text-align:center}
+.sum b{font:300 20px "Noto Serif TC",serif}
+.sum span{display:block;font-size:10px;color:var(--ink3)}
+
+/* ── Card List ── */
+.list{display:flex;flex-direction:column;gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.cardtop{
+  display:flex;justify-content:space-between;gap:10px;align-items:center;
+  background:var(--paper2);border-bottom:1px solid var(--line);padding:12px 14px;
+}
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:3px;padding:3px 8px;font:11px "Noto Serif TC",serif}
+.sight{background:#e8f4f1;color:var(--teal);border:1px solid #b8ddd7}
+.food{background:#fff1e3;color:#bf552a;border:1px solid #edc99d}
+.hotel{background:#efe9fb;color:#5b3b95;border:1px solid #c9b8ec}
+.transport{background:#eee;color:#444;border:1px solid #ccc}
+.time{font-size:11px;color:var(--ink3)}
+.body{padding:13px 14px}
+.name{font:16px "Noto Serif TC",serif;margin-bottom:6px}
+.note{font-size:13px;color:var(--ink2);line-height:1.7;margin:8px 0}
+.stars{color:#bf8427;font-size:16px;letter-spacing:1px;margin:6px 0}
+
+/* ── Photos (larger thumbnails) ── */
+.photo{
+  width:90px;height:90px;object-fit:cover;
+  border-radius:5px;border:1px solid var(--line);cursor:pointer;
+  display:block;
+}
+.photos{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+/* ── Expense / Route ── */
+.expense,.route{margin:10px 0;padding:10px 12px;border-radius:5px;font-size:12px;line-height:1.6}
+.expense{background:#fff8ea;border:1px solid #efd7a8;color:#684716}
+.route{background:#f6fbfa;border:1px solid rgba(25,119,108,.2);color:var(--ink2)}
+.route a{display:inline-flex;margin-top:8px;color:var(--teal);text-decoration:none}
+
+/* ── Card Actions ── */
+.actions{display:flex;justify-content:flex-end;gap:8px;background:var(--paper);border-top:1px solid var(--line);padding:8px 14px}
+.act{
+  color:var(--ink2);border:1px solid rgba(26,20,16,.25);
+  padding:7px 12px;border-radius:4px;background:transparent;
+  cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-size:12px;
+}
+.act.del{color:var(--red);border-color:rgba(183,53,42,.35)}
+.act:active{opacity:.7}
+
+/* ── Empty State ── */
+.empty{text-align:center;color:var(--ink3);padding:52px 10px}
+.empty i{font-size:42px;opacity:.2;display:block;margin-bottom:12px}
+
+/* ── Modal (bottom sheet) ── */
+.modalwrap{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);
+  display:flex;align-items:flex-end;justify-content:center;
+  z-index:10;opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.modalwrap.open{opacity:1;pointer-events:all}
+.modalwrap.hidden{display:none}
+.modal{
+  width:100%;max-width:720px;background:var(--paper);
+  border-radius:16px 16px 0 0;
+  max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:0 22px calc(22px + var(--safe-bottom));
+  transform:translateY(100%);
+  transition:transform .3s cubic-bezier(.32,.72,0,1);
+  scrollbar-width:none;
+}
+.modal::-webkit-scrollbar{display:none}
+.modalwrap.open .modal{transform:translateY(0)}
+.sheet-handle{width:36px;height:4px;background:rgba(26,20,16,.2);border-radius:2px;margin:12px auto 16px}
+.mtitle{display:flex;justify-content:space-between;align-items:center;font:18px "Noto Serif TC",serif;margin-bottom:16px}
+.x{border:0;background:none;font-size:24px;color:var(--ink3);cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--paper2)}
+
+/* ── Form ── */
+.group{margin-bottom:13px}
+.label{display:block;font-size:11px;color:var(--ink3);letter-spacing:1px;margin-bottom:5px;text-transform:uppercase}
+.input,.select,.textarea{
+  width:100%;border:1.5px solid rgba(26,20,16,.2);
+  background:#fff;border-radius:6px;padding:10px 12px;color:var(--ink);
+  font-size:15px;outline:none;transition:border-color .2s;
+  -webkit-appearance:none;appearance:none;
+}
+.input:focus,.select:focus,.textarea:focus{border-color:var(--teal)}
+.textarea{min-height:76px;resize:vertical;line-height:1.6}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick{font-size:30px;color:#ddd;cursor:pointer;line-height:1;user-select:none}
+.pick.sel,.pick.hover{color:#bf8427}
+.upload{
+  border:1.5px dashed rgba(26,20,16,.25);padding:18px;
+  text-align:center;border-radius:6px;cursor:pointer;color:var(--ink3);
+  transition:background .2s;
+}
+.upload:active{background:var(--paper2)}
+.preview-img{
+  width:64px;height:64px;object-fit:cover;
+  border:1px solid var(--line);border-radius:5px;cursor:pointer;
+}
+.routefields{display:none;background:#f6fbfa;border:1px solid rgba(25,119,108,.2);border-radius:5px;padding:12px;margin-bottom:13px}
+.routefields.active{display:block}
+.submit{
+  width:100%;justify-content:center;
+  background:var(--ink);border-color:var(--ink);
+  font:14px "Noto Serif TC",serif;margin-top:6px;
+  padding:13px;border-radius:8px;
+}
+.submit:active{opacity:.8}
+
+/* ── Sync Modal ── */
+.status{font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:12px;padding:10px 12px;background:var(--paper2);border-radius:5px}
+
+/* ── Lightbox ── */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:20;display:flex;align-items:center;justify-content:center}
+.lightbox.hidden{display:none}
+.lightbox img{max-width:94%;max-height:90vh;object-fit:contain;border-radius:4px}
+.lb-close{
+  position:absolute;top:calc(16px + var(--safe-top));right:16px;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:none;cursor:pointer;
+  color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;
+}
+
+/* ── Storage Warning ── */
+.store-warn{
+  display:none;background:#fff3cd;border:1px solid #ffc107;
+  color:#856404;font-size:12px;padding:8px 14px;text-align:center;
+}
+.store-warn.show{display:block}
+
+/* ── Responsive ── */
+@media(max-width:560px){
+  .row,.summary{grid-template-columns:1fr 1fr}
+  .stats{gap:12px}
+  .stat b{font-size:18px}
+}
+
+/* ── Print ── */
+@media print{
+  .toolbar,.tabs,.fab,.actions,.modalwrap,.lightbox{display:none!important}
+  body{background:#fff}
+  .header{background:#fff;color:#111;border-bottom:1px solid #ddd;padding:16px 0}
+  .header:after{display:none}
+  .sub,.eyebrow,.stat span{color:#555}
+  .stat b{color:#111}
+  main{padding:0}
+  .card{break-inside:avoid;border-color:#ddd}
+  .cardtop{background:#f6f3ee}
+}
 </style>
 </head>
 <body>
+
 <header class="header">
   <div class="eyebrow">Tokyo Travel Diary · 2026</div>
   <h1 class="title">東京六日旅遊日記</h1>
@@ -25,132 +275,551 @@
     <div class="stat"><b id="totalExpense">¥0</b><span>花費</span></div>
   </div>
 </header>
+
 <nav class="toolbar">
   <button class="tool" onclick="exportPdf()"><i class="ti ti-file-type-pdf"></i>匯出 PDF</button>
-  <button class="tool" onclick="openSync()"><i class="ti ti-brand-google"></i>Google Sheets</button>
-  <button class="tool" onclick="syncToSheets()"><i class="ti ti-cloud-up"></i>上傳同步</button>
-  <button class="tool" onclick="loadFromSheets()"><i class="ti ti-cloud-down"></i>下載同步</button>
+  <button class="tool" onclick="openSync()"><i class="ti ti-settings"></i>同步設定</button>
+  <button class="tool" onclick="syncToSheets()"><i class="ti ti-cloud-up"></i>上傳</button>
+  <button class="tool" onclick="loadFromSheets()"><i class="ti ti-cloud-down"></i>下載</button>
 </nav>
+
+<div class="store-warn" id="storeWarn">⚠️ 儲存空間接近上限，建議減少照片數量或匯出備份</div>
+
 <nav class="tabs" id="tabs"></nav>
 <main id="main"></main>
 
+<!-- FAB -->
+<button class="fab" onclick="openEntry()" aria-label="新增記錄">
+  <i class="ti ti-plus"></i>
+</button>
+
+<!-- Entry Modal -->
 <div class="modalwrap hidden" id="entryModal">
   <section class="modal">
-    <div class="mtitle"><span id="modalTitle">新增記錄</span><button class="x" onclick="closeEntry()">×</button></div>
-    <div class="group"><label class="label">類型</label><select class="select" id="fType"><option value="sight">景點</option><option value="food">美食</option><option value="hotel">住宿</option><option value="transport">交通</option></select></div>
-    <div class="group"><label class="label">名稱</label><input class="input" id="fName" placeholder="如：淺草寺、一蘭拉麵"></div>
-    <div class="row"><div class="group"><label class="label">地點（區域）</label><input class="input" id="fLocation"></div><div class="group"><label class="label">時間</label><input class="input" id="fTime" type="time"></div></div>
-    <div class="group"><label class="label">個人評語</label><textarea class="textarea" id="fNote"></textarea></div>
-    <div class="row"><div class="group"><label class="label">費用金額</label><input class="input" id="fExpenseAmount" type="number" min="0" step="1"></div><div class="group"><label class="label">幣別</label><select class="select" id="fExpenseCurrency"><option value="JPY">日圓 JPY</option><option value="TWD">台幣 TWD</option></select></div></div>
-    <div class="group"><label class="label">費用備註</label><input class="input" id="fExpenseNote" placeholder="門票、餐費、伴手禮、拍貼照片"></div>
-    <div class="routefields" id="routeFields">
-      <div class="row"><div class="group"><label class="label">出發地</label><input class="input" id="fOrigin"></div><div class="group"><label class="label">目的地</label><input class="input" id="fDestination"></div></div>
-      <div class="row"><div class="group"><label class="label">交通方式</label><select class="select" id="fTransitMode"><option value="transit">電車／大眾運輸</option><option value="walking">步行</option><option value="driving">開車／計程車</option><option value="bicycling">自行車</option></select></div><div class="group"><label class="label">交通時間</label><input class="input" id="fDuration" placeholder="如：28 分鐘"></div></div>
+    <div class="sheet-handle"></div>
+    <div class="mtitle">
+      <span id="modalTitle">新增記錄</span>
+      <button class="x" onclick="closeEntry()"><i class="ti ti-x"></i></button>
     </div>
-    <div class="group"><label class="label">個人評分</label><div id="stars"><span class="pick" data-v="1">★</span><span class="pick" data-v="2">★</span><span class="pick" data-v="3">★</span><span class="pick" data-v="4">★</span><span class="pick" data-v="5">★</span></div></div>
-    <div class="group"><label class="label">上傳照片</label><div class="upload" onclick="photoInput.click()"><i class="ti ti-camera" style="font-size:24px"></i><div>點擊上傳照片</div></div><input id="photoInput" type="file" accept="image/*" multiple hidden onchange="handlePhotos(event)"><div class="photos" id="preview"></div></div>
+    <div class="group">
+      <label class="label">類型</label>
+      <select class="select" id="fType">
+        <option value="sight">🏯 景點</option>
+        <option value="food">🍜 美食</option>
+        <option value="hotel">🏨 住宿</option>
+        <option value="transport">🚄 交通</option>
+      </select>
+    </div>
+    <div class="group"><label class="label">名稱</label><input class="input" id="fName" placeholder="如：淺草寺、一蘭拉麵" autocomplete="off"></div>
+    <div class="row">
+      <div class="group"><label class="label">地點（區域）</label><input class="input" id="fLocation" autocomplete="off"></div>
+      <div class="group"><label class="label">時間</label><input class="input" id="fTime" type="time"></div>
+    </div>
+    <div class="group"><label class="label">個人評語</label><textarea class="textarea" id="fNote"></textarea></div>
+    <div class="row">
+      <div class="group"><label class="label">費用金額</label><input class="input" id="fExpenseAmount" type="number" min="0" step="1" inputmode="numeric"></div>
+      <div class="group"><label class="label">幣別</label><select class="select" id="fExpenseCurrency"><option value="JPY">日圓 JPY</option><option value="TWD">台幣 TWD</option></select></div>
+    </div>
+    <div class="group"><label class="label">費用備註</label><input class="input" id="fExpenseNote" placeholder="門票、餐費、伴手禮…" autocomplete="off"></div>
+    <div class="routefields" id="routeFields">
+      <div class="row">
+        <div class="group"><label class="label">出發地</label><input class="input" id="fOrigin" autocomplete="off"></div>
+        <div class="group"><label class="label">目的地</label><input class="input" id="fDestination" autocomplete="off"></div>
+      </div>
+      <div class="row">
+        <div class="group">
+          <label class="label">交通方式</label>
+          <select class="select" id="fTransitMode">
+            <option value="transit">電車／大眾運輸</option>
+            <option value="walking">步行</option>
+            <option value="driving">開車／計程車</option>
+            <option value="bicycling">自行車</option>
+          </select>
+        </div>
+        <div class="group"><label class="label">交通時間</label><input class="input" id="fDuration" placeholder="如：28 分鐘" autocomplete="off"></div>
+      </div>
+    </div>
+    <div class="group">
+      <label class="label">個人評分</label>
+      <div id="stars" style="display:flex;gap:6px;padding:6px 0">
+        <span class="pick" data-v="1">★</span>
+        <span class="pick" data-v="2">★</span>
+        <span class="pick" data-v="3">★</span>
+        <span class="pick" data-v="4">★</span>
+        <span class="pick" data-v="5">★</span>
+      </div>
+    </div>
+    <div class="group">
+      <label class="label">上傳照片</label>
+      <div class="upload" onclick="photoInput.click()">
+        <i class="ti ti-camera" style="font-size:26px"></i>
+        <div style="margin-top:6px;font-size:13px">點擊上傳照片</div>
+        <div style="font-size:11px;opacity:.6;margin-top:3px">照片將自動壓縮以節省空間</div>
+      </div>
+      <input id="photoInput" type="file" accept="image/*" multiple hidden onchange="handlePhotos(event)">
+      <div class="photos" id="preview"></div>
+    </div>
     <button class="submit" onclick="submitEntry()">儲存記錄 ✦</button>
   </section>
 </div>
 
+<!-- Sync Modal -->
 <div class="modalwrap hidden" id="syncModal">
   <section class="modal">
-    <div class="mtitle"><span>Google Sheets 同步設定</span><button class="x" onclick="closeSync()">×</button></div>
+    <div class="sheet-handle"></div>
+    <div class="mtitle">
+      <span>Google Sheets 同步設定</span>
+      <button class="x" onclick="closeSync()"><i class="ti ti-x"></i></button>
+    </div>
     <div class="status" id="syncStatus">貼上 Google Apps Script 部署後的 Web App URL，即可同步資料。</div>
-    <div class="group"><label class="label">Apps Script Web App URL</label><input class="input" id="sheetUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+    <div class="group">
+      <label class="label">Apps Script Web App URL</label>
+      <input class="input" id="sheetUrl" placeholder="https://script.google.com/macros/s/.../exec">
+    </div>
     <button class="submit" onclick="saveSheetUrl()">儲存同步網址</button>
-    <button class="submit" onclick="syncToSheets()">上傳目前資料到 Sheets</button>
-    <button class="submit" onclick="loadFromSheets()">從 Sheets 下載資料</button>
+    <button class="submit" style="margin-top:8px" onclick="syncToSheets()">上傳目前資料到 Sheets</button>
+    <button class="submit" style="margin-top:8px" onclick="loadFromSheets()">從 Sheets 下載資料</button>
   </section>
 </div>
 
-<div class="lightbox hidden" id="lightbox" onclick="this.classList.add('hidden')"><img id="lightboxImg"></div>
+<!-- Lightbox -->
+<div class="lightbox hidden" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()"><i class="ti ti-x"></i></button>
+  <img id="lightboxImg" alt="">
+</div>
 
 <script>
-const DAYS=[{date:'7/1',label:'第一天'},{date:'7/2',label:'第二天'},{date:'7/3',label:'第三天'},{date:'7/4',label:'第四天'},{date:'7/5',label:'第五天'},{date:'7/6',label:'第六天'}];
+/* ── Constants ── */
+const DAYS=[
+  {date:'7/1',label:'第一天'},
+  {date:'7/2',label:'第二天'},
+  {date:'7/3',label:'第三天'},
+  {date:'7/4',label:'第四天'},
+  {date:'7/5',label:'第五天'},
+  {date:'7/6',label:'第六天'}
+];
 const LABELS={sight:'景點',food:'美食',hotel:'住宿',transport:'交通'};
-const TYPE={sight:'sight',food:'food',hotel:'hotel',transport:'transport'};
 const RATE=['','一般','還行','不錯','很棒！','完美！'];
+
+/* ── Element refs ── */
 const el={
-  tabs:document.getElementById('tabs'),main:document.getElementById('main'),
-  entryModal:document.getElementById('entryModal'),syncModal:document.getElementById('syncModal'),
-  modalTitle:document.getElementById('modalTitle'),stars:document.getElementById('stars'),
-  fType:document.getElementById('fType'),fName:document.getElementById('fName'),fLocation:document.getElementById('fLocation'),fTime:document.getElementById('fTime'),fNote:document.getElementById('fNote'),
-  fExpenseAmount:document.getElementById('fExpenseAmount'),fExpenseCurrency:document.getElementById('fExpenseCurrency'),fExpenseNote:document.getElementById('fExpenseNote'),
-  fOrigin:document.getElementById('fOrigin'),fDestination:document.getElementById('fDestination'),fTransitMode:document.getElementById('fTransitMode'),fDuration:document.getElementById('fDuration'),
-  routeFields:document.getElementById('routeFields'),preview:document.getElementById('preview'),
-  lightbox:document.getElementById('lightbox'),lightboxImg:document.getElementById('lightboxImg'),
-  totalEntries:document.getElementById('totalEntries'),totalPhotos:document.getElementById('totalPhotos'),avgRating:document.getElementById('avgRating'),daysLogged:document.getElementById('daysLogged'),totalExpense:document.getElementById('totalExpense'),
-  sheetUrl:document.getElementById('sheetUrl'),syncStatus:document.getElementById('syncStatus')
+  tabs:document.getElementById('tabs'),
+  main:document.getElementById('main'),
+  entryModal:document.getElementById('entryModal'),
+  syncModal:document.getElementById('syncModal'),
+  modalTitle:document.getElementById('modalTitle'),
+  stars:document.getElementById('stars'),
+  fType:document.getElementById('fType'),
+  fName:document.getElementById('fName'),
+  fLocation:document.getElementById('fLocation'),
+  fTime:document.getElementById('fTime'),
+  fNote:document.getElementById('fNote'),
+  fExpenseAmount:document.getElementById('fExpenseAmount'),
+  fExpenseCurrency:document.getElementById('fExpenseCurrency'),
+  fExpenseNote:document.getElementById('fExpenseNote'),
+  fOrigin:document.getElementById('fOrigin'),
+  fDestination:document.getElementById('fDestination'),
+  fTransitMode:document.getElementById('fTransitMode'),
+  fDuration:document.getElementById('fDuration'),
+  routeFields:document.getElementById('routeFields'),
+  preview:document.getElementById('preview'),
+  lightbox:document.getElementById('lightbox'),
+  lightboxImg:document.getElementById('lightboxImg'),
+  totalEntries:document.getElementById('totalEntries'),
+  totalPhotos:document.getElementById('totalPhotos'),
+  avgRating:document.getElementById('avgRating'),
+  daysLogged:document.getElementById('daysLogged'),
+  totalExpense:document.getElementById('totalExpense'),
+  sheetUrl:document.getElementById('sheetUrl'),
+  syncStatus:document.getElementById('syncStatus'),
+  storeWarn:document.getElementById('storeWarn')
 };
+
+/* ── State ── */
 let data={0:[],1:[],2:[],3:[],4:[],5:[]};
-let currentDay=0,currentRating=0,pendingPhotos=[],editingId=null,pendingDeleteId=null,sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';
+let currentDay=0,currentRating=0,pendingPhotos=[],editingId=null,pendingDeleteId=null;
+let sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';
+
 try{const saved=localStorage.getItem('tkDiary26');if(saved)data=JSON.parse(saved)}catch(e){}
-function save(){localStorage.setItem('tkDiary26',JSON.stringify(data))}
-function tabs(){el.tabs.innerHTML=DAYS.map(function(d,i){return `<button class="tab ${i===currentDay?'active':''}" onclick="switchDay(${i})">${d.date} ${d.label}</button>`}).join('')}
-function switchDay(i){currentDay=i;pendingDeleteId=null;tabs();render()}
+
+/* ── Storage save with size check ── */
+function save(){
+  try{
+    const json=JSON.stringify(data);
+    localStorage.setItem('tkDiary26',json);
+    // warn if approaching ~4MB (localStorage limit ~5MB)
+    const kb=new Blob([json]).size/1024;
+    el.storeWarn.classList.toggle('show',kb>3800);
+  }catch(e){
+    el.storeWarn.classList.add('show');
+    alert('儲存失敗！儲存空間已滿，請減少照片數量或先匯出備份。');
+  }
+}
+
+/* ── Photo compression ── */
+function compressImage(dataUrl,maxW,quality,cb){
+  const img=new Image();
+  img.onload=function(){
+    let w=img.width,h=img.height;
+    if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}
+    const c=document.createElement('canvas');
+    c.width=w;c.height=h;
+    c.getContext('2d').drawImage(img,0,0,w,h);
+    cb(c.toDataURL('image/jpeg',quality));
+  };
+  img.src=dataUrl;
+}
+
+/* ── Tabs ── */
+function tabs(){
+  el.tabs.innerHTML=DAYS.map(function(d,i){
+    return '<button class="tab'+(i===currentDay?' active':'')+'" onclick="switchDay('+i+')">'+d.date+' '+d.label+'</button>';
+  }).join('');
+  // scroll active tab into view
+  setTimeout(function(){
+    var active=el.tabs.querySelector('.active');
+    if(active)active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  },60);
+}
+
+function switchDay(i){
+  currentDay=i;
+  pendingDeleteId=null;
+  tabs();render();
+}
+
+/* ── Render ── */
 function render(){
- const d=DAYS[currentDay],entries=data[currentDay]||[];
- const photos=entries.reduce(function(s,e){return s+((e.photos&&e.photos.length)||0)},0);
- const rated=entries.filter(function(e){return e.rating>0});
- const avg=rated.length?rated.reduce(function(s,e){return s+e.rating},0)/rated.length:0;
- const exp=sumExpenses(entries);
- let html=`<div class="dayhead"><div class="dayinfo"><div class="daynum">${d.date}</div><div class="daydate">2026年7月${d.date.split('/')[1]}日</div><div class="daylabel">${d.label}</div></div><button class="add" onclick="openEntry()"><i class="ti ti-plus"></i>新增記錄</button></div>`;
- if(entries.length)html+=`<div class="summary"><div class="sum"><b>${entries.length}</b><span>記錄總數</span></div><div class="sum"><b>${photos}</b><span>照片張數</span></div><div class="sum"><b>${avg?avg.toFixed(1)+'★':'—'}</b><span>平均評分</span></div><div class="sum"><b>${expenseSummary(exp)}</b><span>今日花費</span></div></div>`;
- html+=`<div class="list">${entries.length?entries.map(card).join(''):`<div class="empty"><i class="ti ti-torii-gate empty-icon"></i><div>今日尚無記錄，開始記錄你的東京回憶吧</div></div>`}</div>`;
- el.main.innerHTML=html;stats();
+  var d=DAYS[currentDay],entries=data[currentDay]||[];
+  var photos=entries.reduce(function(s,e){return s+((e.photos&&e.photos.length)||0)},0);
+  var rated=entries.filter(function(e){return e.rating>0});
+  var avg=rated.length?rated.reduce(function(s,e){return s+e.rating},0)/rated.length:0;
+  var exp=sumExpenses(entries);
+
+  var html='<div class="dayhead">'
+    +'<div class="dayinfo">'
+    +'<div class="daynum">'+d.date+'</div>'
+    +'<div class="daydate">2026年7月'+d.date.split('/')[1]+'日</div>'
+    +'<div class="daylabel">'+d.label+'</div>'
+    +'</div>'
+    +'</div>';
+
+  if(entries.length){
+    html+='<div class="summary">'
+      +'<div class="sum"><b>'+entries.length+'</b><span>記錄總數</span></div>'
+      +'<div class="sum"><b>'+photos+'</b><span>照片張數</span></div>'
+      +'<div class="sum"><b>'+(avg?avg.toFixed(1)+'★':'—')+'</b><span>平均評分</span></div>'
+      +'<div class="sum"><b>'+expenseSummary(exp)+'</b><span>今日花費</span></div>'
+      +'</div>';
+  }
+
+  html+='<div class="list" id="cardList">';
+  if(entries.length){
+    html+=entries.map(card).join('');
+  }else{
+    html='<div class="dayhead">'
+      +'<div class="dayinfo">'
+      +'<div class="daynum">'+d.date+'</div>'
+      +'<div class="daydate">2026年7月'+d.date.split('/')[1]+'日</div>'
+      +'<div class="daylabel">'+d.label+'</div>'
+      +'</div>'
+      +'</div>'
+      +'<div class="list"><div class="empty"><i class="ti ti-torii-gate"></i><div>今日尚無記錄，點右下角 ＋ 開始記錄東京回憶</div></div></div>';
+    el.main.innerHTML=html;
+    stats();
+    return;
+  }
+  html+='</div>';
+  el.main.innerHTML='<div class="dayhead">'
+    +'<div class="dayinfo">'
+    +'<div class="daynum">'+d.date+'</div>'
+    +'<div class="daydate">2026年7月'+d.date.split('/')[1]+'日</div>'
+    +'<div class="daylabel">'+d.label+'</div>'
+    +'</div>'
+    +'</div>'
+    +(entries.length?'<div class="summary">'
+      +'<div class="sum"><b>'+entries.length+'</b><span>記錄總數</span></div>'
+      +'<div class="sum"><b>'+photos+'</b><span>照片張數</span></div>'
+      +'<div class="sum"><b>'+(avg?avg.toFixed(1)+'★':'—')+'</b><span>平均評分</span></div>'
+      +'<div class="sum"><b>'+expenseSummary(exp)+'</b><span>今日花費</span></div>'
+      +'</div>':'')
+    +'<div class="list">'+entries.map(card).join('')+'</div>';
+  stats();
+
+  // Use event delegation for photo clicks (avoids inline base64 in onclick)
+  document.getElementById('cardList') && document.getElementById('cardList').addEventListener('click',function(e){
+    var ph=e.target.closest('.photo-lb');
+    if(ph)openLightbox(ph.dataset.src);
+  },{once:true});
 }
+
 function card(e){
- const stars='★'.repeat(e.rating||0)+'☆'.repeat(5-(e.rating||0));
- const photos=(e.photos||[]).map(function(p){return `<img class="photo" src="${p}" onclick="openLightbox('${p}')">`}).join('');
- return `<article class="card"><div class="cardtop"><div><span class="badge ${TYPE[e.type]||''}"><i class="ti ti-${icon(e.type)}"></i>${LABELS[e.type]||e.type}</span>${e.location?` <span class="time"><i class="ti ti-map-pin"></i> ${e.location}</span>`:''}</div><span class="time">${e.time||''}</span></div><div class="body"><div class="name">${e.name||'（未命名）'}</div>${e.rating?`<div class="stars">${stars} <span class="time">${RATE[e.rating]}</span></div>`:''}${e.note?`<div class="note">${e.note}</div>`:''}${expenseHtml(e)}${routeHtml(e)}${photos?`<div class="photos">${photos}</div>`:''}</div><div class="actions"><button class="act" onclick="editEntry('${e.id}')"><i class="ti ti-pencil"></i>編輯</button>${pendingDeleteId===e.id?`<button class="act del" onclick="deleteEntry('${e.id}')"><i class="ti ti-check"></i>確認刪除</button>`:`<button class="act del" onclick="requestDelete('${e.id}')"><i class="ti ti-trash"></i>刪除</button>`}</div></article>`;
+  var stars='★'.repeat(e.rating||0)+'☆'.repeat(5-(e.rating||0));
+  var photos=(e.photos||[]).map(function(p,i){
+    return '<img class="photo photo-lb" data-src="'+encodeURIComponent(p)+'" src="'+p+'" loading="lazy">';
+  }).join('');
+  return '<article class="card">'
+    +'<div class="cardtop">'
+    +'<div><span class="badge '+(e.type||'')+'">'
+    +'<i class="ti ti-'+icon(e.type)+'"></i>'+( LABELS[e.type]||e.type)+'</span>'
+    +(e.location?' <span class="time"><i class="ti ti-map-pin"></i> '+e.location+'</span>':'')
+    +'</div>'
+    +'<span class="time">'+(e.time||'')+'</span>'
+    +'</div>'
+    +'<div class="body">'
+    +'<div class="name">'+(e.name||'（未命名）')+'</div>'
+    +(e.rating?'<div class="stars">'+stars+' <span class="time">'+RATE[e.rating]+'</span></div>':'')
+    +(e.note?'<div class="note">'+e.note+'</div>':'')
+    +expenseHtml(e)
+    +routeHtml(e)
+    +(photos?'<div class="photos">'+photos+'</div>':'')
+    +'</div>'
+    +'<div class="actions">'
+    +'<button class="act" onclick="editEntry(\''+e.id+'\')"><i class="ti ti-pencil"></i>編輯</button>'
+    +(pendingDeleteId===e.id
+      ?'<button class="act del" onclick="deleteEntry(\''+e.id+'\')"><i class="ti ti-check"></i>確認刪除</button>'
+      :'<button class="act del" onclick="requestDelete(\''+e.id+'\')"><i class="ti ti-trash"></i>刪除</button>')
+    +'</div>'
+    +'</article>';
 }
+
 function icon(t){return {sight:'torii-gate',food:'bowl-chopsticks',hotel:'building',transport:'train'}[t]||'map-pin'}
-function expenseHtml(e){return e.expense&&Number(e.expense.amount)?`<div class="expense"><i class="ti ti-receipt"></i> <b>${money(e.expense.amount,e.expense.currency)}</b>${e.expense.note?`<div>${e.expense.note}</div>`:''}</div>`:''}
-function routeHtml(e){if(!e.route||(!e.route.origin&&!e.route.destination&&!e.route.duration))return '';const label={transit:'大眾運輸',walking:'步行',driving:'開車／計程車',bicycling:'自行車'}[e.route.mode]||'交通',url=mapUrl(e.route);return `<div class="route"><div><i class="ti ti-route"></i> ${e.route.origin||'未填出發地'} → ${e.route.destination||'未填目的地'}</div><div>${label}${e.route.duration?' · '+e.route.duration:''}</div>${url?`<a href="${url}" target="_blank" rel="noopener"><i class="ti ti-map-2"></i>開啟 Google Maps 路線</a>`:''}</div>`}
-function mapUrl(r){if(!r.origin&&!r.destination)return '';const p=new URLSearchParams({api:'1'});if(r.origin)p.set('origin',r.origin);if(r.destination)p.set('destination',r.destination);if(r.mode)p.set('travelmode',r.mode);return `https://www.google.com/maps/dir/?${p}`}
+
+/* ── Expense ── */
+function expenseHtml(e){
+  return e.expense&&Number(e.expense.amount)
+    ?'<div class="expense"><i class="ti ti-receipt"></i> <b>'+money(e.expense.amount,e.expense.currency)+'</b>'+(e.expense.note?'<div>'+e.expense.note+'</div>':'')+'</div>':'';
+}
+function addExpense(t,e){if(e&&Number(e.amount)){var c=e.currency||'JPY';t[c]=(t[c]||0)+Number(e.amount)}}
+function sumExpenses(list){var t={JPY:0,TWD:0};list.forEach(function(e){addExpense(t,e.expense)});return t}
+function money(n,c){return c==='TWD'?'NT$'+Number(n).toLocaleString('zh-TW'):'¥'+Number(n).toLocaleString('ja-JP')}
+function expenseSummary(t){var a=[];if(t.JPY)a.push(money(t.JPY,'JPY'));if(t.TWD)a.push(money(t.TWD,'TWD'));return a.join(' / ')||'¥0'}
+
+/* ── Route ── */
+function routeHtml(e){
+  if(!e.route||(!e.route.origin&&!e.route.destination&&!e.route.duration))return '';
+  var label={transit:'大眾運輸',walking:'步行',driving:'開車／計程車',bicycling:'自行車'}[e.route.mode]||'交通';
+  var url=mapUrl(e.route);
+  return '<div class="route">'
+    +'<div><i class="ti ti-route"></i> '+(e.route.origin||'未填出發地')+' → '+(e.route.destination||'未填目的地')+'</div>'
+    +'<div>'+label+(e.route.duration?' · '+e.route.duration:'')+'</div>'
+    +(url?'<a href="'+url+'" target="_blank" rel="noopener"><i class="ti ti-map-2"></i>開啟 Google Maps 路線</a>':'')
+    +'</div>';
+}
+function mapUrl(r){
+  if(!r.origin&&!r.destination)return '';
+  var p=new URLSearchParams({api:'1'});
+  if(r.origin)p.set('origin',r.origin);
+  if(r.destination)p.set('destination',r.destination);
+  if(r.mode)p.set('travelmode',r.mode);
+  return 'https://www.google.com/maps/dir/?'+p;
+}
+
+/* ── Stats ── */
+function stats(){
+  var total=0,photos=0,rs=0,rc=0,days=0,exp={JPY:0,TWD:0};
+  Object.values(data).forEach(function(list){
+    if(list.length)days++;
+    list.forEach(function(e){
+      total++;
+      photos+=(e.photos&&e.photos.length)||0;
+      if(e.rating){rs+=e.rating;rc++}
+      addExpense(exp,e.expense);
+    });
+  });
+  el.totalEntries.textContent=total;
+  el.totalPhotos.textContent=photos;
+  el.avgRating.textContent=rc?(rs/rc).toFixed(1)+'★':'—';
+  el.daysLogged.textContent=days;
+  el.totalExpense.textContent=expenseSummary(exp);
+}
+
+/* ── Entry Modal ── */
+function nowTime(){
+  var n=new Date();
+  return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+}
+
 function openEntry(entry){
- entry=entry||null;editingId=entry?entry.id:null;currentRating=Number(entry?entry.rating||0:0);pendingPhotos=entry&&entry.photos?[].concat(entry.photos):[];el.modalTitle.textContent=entry?'編輯記錄':'新增記錄';
- el.fType.value=entry?entry.type||'sight':'sight';el.fName.value=entry?entry.name||'':'';el.fLocation.value=entry?entry.location||'':'';el.fTime.value=entry?entry.time||'':'';el.fNote.value=entry?entry.note||'':'';
- el.fExpenseAmount.value=entry&&entry.expense?entry.expense.amount||'':'';el.fExpenseCurrency.value=entry&&entry.expense?entry.expense.currency||'JPY':'JPY';el.fExpenseNote.value=entry&&entry.expense?entry.expense.note||'':'';
- el.fOrigin.value=entry&&entry.route?entry.route.origin||'':'';el.fDestination.value=entry&&entry.route?entry.route.destination||'':'';el.fTransitMode.value=entry&&entry.route?entry.route.mode||'transit':'transit';el.fDuration.value=entry&&entry.route?entry.route.duration||'':'';
- previewPhotos();markStars();toggleRoute();el.entryModal.classList.remove('hidden');
+  entry=entry||null;
+  editingId=entry?entry.id:null;
+  currentRating=Number(entry?entry.rating||0:0);
+  pendingPhotos=entry&&entry.photos?[].concat(entry.photos):[];
+  el.modalTitle.textContent=entry?'編輯記錄':'新增記錄';
+  el.fType.value=entry?entry.type||'sight':'sight';
+  el.fName.value=entry?entry.name||'':'';
+  el.fLocation.value=entry?entry.location||'':'';
+  // Default to current time for new entries
+  el.fTime.value=entry?entry.time||'':nowTime();
+  el.fNote.value=entry?entry.note||'':'';
+  el.fExpenseAmount.value=entry&&entry.expense?entry.expense.amount||'':'';
+  el.fExpenseCurrency.value=entry&&entry.expense?entry.expense.currency||'JPY':'JPY';
+  el.fExpenseNote.value=entry&&entry.expense?entry.expense.note||'':'';
+  el.fOrigin.value=entry&&entry.route?entry.route.origin||'':'';
+  el.fDestination.value=entry&&entry.route?entry.route.destination||'':'';
+  el.fTransitMode.value=entry&&entry.route?entry.route.mode||'transit':'transit';
+  el.fDuration.value=entry&&entry.route?entry.route.duration||'':'';
+  previewPhotos();markStars();toggleRoute();
+  el.entryModal.classList.remove('hidden');
+  // Trigger open animation next frame
+  requestAnimationFrame(function(){el.entryModal.classList.add('open')});
 }
-function closeEntry(){el.entryModal.classList.add('hidden');editingId=null}
-function editEntry(id){pendingDeleteId=null;const e=(data[currentDay]||[]).find(function(x){return x.id===id});if(e)openEntry(e)}
+
+function closeEntry(){
+  el.entryModal.classList.remove('open');
+  setTimeout(function(){el.entryModal.classList.add('hidden');editingId=null},280);
+}
+
+function editEntry(id){
+  pendingDeleteId=null;
+  var e=(data[currentDay]||[]).find(function(x){return x.id===id});
+  if(e)openEntry(e);
+}
+
 function toggleRoute(){el.routeFields.classList.toggle('active',el.fType.value==='transport')}
-function markStars(){document.querySelectorAll('.pick').forEach(function(s){s.classList.toggle('sel',Number(s.dataset.v)<=currentRating)})}
-el.stars.addEventListener('click',function(e){if(e.target.dataset.v){currentRating=Number(e.target.dataset.v);markStars()}});
-el.stars.addEventListener('mouseover',function(e){if(e.target.dataset.v)document.querySelectorAll('.pick').forEach(function(s){s.classList.toggle('hover',Number(s.dataset.v)<=Number(e.target.dataset.v))})});
-el.stars.addEventListener('mouseleave',function(){document.querySelectorAll('.pick').forEach(function(s){s.classList.remove('hover')})});
 el.fType.addEventListener('change',toggleRoute);
-function handlePhotos(ev){Array.prototype.slice.call(ev.target.files).forEach(function(f){const r=new FileReader();r.onload=function(e){pendingPhotos.push(e.target.result);previewPhotos()};r.readAsDataURL(f)});ev.target.value=''}
-function previewPhotos(){el.preview.innerHTML='';pendingPhotos.forEach(function(src,i){const img=document.createElement('img');img.src=src;img.className='preview';img.title='點擊移除照片';img.onclick=function(){pendingPhotos.splice(i,1);previewPhotos()};el.preview.appendChild(img)})}
-function submitEntry(){
- const name=el.fName.value.trim();if(!name){alert('請輸入名稱');return}
- const amount=Number(el.fExpenseAmount.value||0),existing=editingId?(data[currentDay]||[]).find(function(e){return e.id===editingId}):null;
- const entry={id:existing?existing.id:'e'+Date.now(),type:el.fType.value,name:name,location:el.fLocation.value.trim(),time:el.fTime.value,note:el.fNote.value.trim(),rating:currentRating,photos:[].concat(pendingPhotos),expense:amount>0?{amount:amount,currency:el.fExpenseCurrency.value,note:el.fExpenseNote.value.trim()}:null,route:el.fType.value==='transport'?{origin:el.fOrigin.value.trim(),destination:el.fDestination.value.trim(),mode:el.fTransitMode.value,duration:el.fDuration.value.trim()}:null,ts:existing?existing.ts:Date.now(),editedTs:existing?Date.now():undefined};
- if(existing)data[currentDay][data[currentDay].findIndex(function(e){return e.id===editingId})]=entry;else data[currentDay].push(entry);
- pendingDeleteId=null;save();closeEntry();render();
+
+/* ── Stars ── */
+function markStars(){
+  document.querySelectorAll('.pick').forEach(function(s){
+    s.classList.toggle('sel',Number(s.dataset.v)<=currentRating);
+  });
 }
+el.stars.addEventListener('click',function(e){
+  if(e.target.dataset.v){currentRating=Number(e.target.dataset.v);markStars()}
+});
+el.stars.addEventListener('mouseover',function(e){
+  if(e.target.dataset.v){
+    document.querySelectorAll('.pick').forEach(function(s){
+      s.classList.toggle('hover',Number(s.dataset.v)<=Number(e.target.dataset.v));
+    });
+  }
+});
+el.stars.addEventListener('mouseleave',function(){
+  document.querySelectorAll('.pick').forEach(function(s){s.classList.remove('hover')});
+});
+
+/* ── Photo handling with compression ── */
+function handlePhotos(ev){
+  Array.prototype.slice.call(ev.target.files).forEach(function(f){
+    var r=new FileReader();
+    r.onload=function(e){
+      compressImage(e.target.result,900,0.78,function(compressed){
+        pendingPhotos.push(compressed);
+        previewPhotos();
+      });
+    };
+    r.readAsDataURL(f);
+  });
+  ev.target.value='';
+}
+
+function previewPhotos(){
+  el.preview.innerHTML='';
+  pendingPhotos.forEach(function(src,i){
+    var img=document.createElement('img');
+    img.src=src;
+    img.className='preview-img';
+    img.title='點擊移除照片';
+    img.onclick=function(){pendingPhotos.splice(i,1);previewPhotos()};
+    el.preview.appendChild(img);
+  });
+}
+
+/* ── Submit ── */
+function submitEntry(){
+  var name=el.fName.value.trim();
+  if(!name){alert('請輸入名稱');return}
+  var amount=Number(el.fExpenseAmount.value||0);
+  var existing=editingId?(data[currentDay]||[]).find(function(e){return e.id===editingId}):null;
+  var entry={
+    id:existing?existing.id:'e'+Date.now(),
+    type:el.fType.value,
+    name:name,
+    location:el.fLocation.value.trim(),
+    time:el.fTime.value,
+    note:el.fNote.value.trim(),
+    rating:currentRating,
+    photos:[].concat(pendingPhotos),
+    expense:amount>0?{amount:amount,currency:el.fExpenseCurrency.value,note:el.fExpenseNote.value.trim()}:null,
+    route:el.fType.value==='transport'?{origin:el.fOrigin.value.trim(),destination:el.fDestination.value.trim(),mode:el.fTransitMode.value,duration:el.fDuration.value.trim()}:null,
+    ts:existing?existing.ts:Date.now(),
+    editedTs:existing?Date.now():undefined
+  };
+  if(existing){
+    data[currentDay][data[currentDay].findIndex(function(e){return e.id===editingId})]=entry;
+  }else{
+    data[currentDay].push(entry);
+  }
+  pendingDeleteId=null;save();closeEntry();
+  setTimeout(render,300);
+}
+
+/* ── Delete (with pendingDeleteId reset on day switch) ── */
 function requestDelete(id){pendingDeleteId=pendingDeleteId===id?null:id;render()}
-function deleteEntry(id){data[currentDay]=data[currentDay].filter(function(e){return e.id!==id});pendingDeleteId=null;save();render()}
+function deleteEntry(id){
+  data[currentDay]=data[currentDay].filter(function(e){return e.id!==id});
+  pendingDeleteId=null;save();render();
+}
+
+/* ── Lightbox (event delegation, no inline base64 in onclick) ── */
+document.addEventListener('click',function(e){
+  var ph=e.target.closest&&e.target.closest('.photo-lb');
+  if(ph){openLightbox(decodeURIComponent(ph.dataset.src));return;}
+});
 function openLightbox(src){el.lightboxImg.src=src;el.lightbox.classList.remove('hidden')}
-function stats(){let total=0,photos=0,rs=0,rc=0,days=0,exp={JPY:0,TWD:0};Object.values(data).forEach(function(list){if(list.length)days++;list.forEach(function(e){total++;photos+=(e.photos&&e.photos.length)||0;if(e.rating){rs+=e.rating;rc++}addExpense(exp,e.expense)})});el.totalEntries.textContent=total;el.totalPhotos.textContent=photos;el.avgRating.textContent=rc?(rs/rc).toFixed(1)+'★':'—';el.daysLogged.textContent=days;el.totalExpense.textContent=expenseSummary(exp)}
-function addExpense(t,e){if(e&&Number(e.amount)){const c=e.currency||'JPY';t[c]=(t[c]||0)+Number(e.amount)}}
-function sumExpenses(list){const t={JPY:0,TWD:0};list.forEach(function(e){addExpense(t,e.expense)});return t}
-function money(n,c){return c==='TWD'?`NT$${Number(n).toLocaleString('zh-TW')}`:`¥${Number(n).toLocaleString('ja-JP')}`}
-function expenseSummary(t){const a=[];if(t.JPY)a.push(money(t.JPY,'JPY'));if(t.TWD)a.push(money(t.TWD,'TWD'));return a.join(' / ')||'¥0'}
+function closeLightbox(){el.lightbox.classList.add('hidden');el.lightboxImg.src=''}
+el.lightbox.addEventListener('click',function(e){if(e.target===el.lightbox||e.target===el.lightboxImg)closeLightbox()});
+
+/* ── PDF export ── */
 function exportPdf(){window.print()}
-function openSync(){el.sheetUrl.value=sheetUrl;setStatus('貼上 Google Apps Script 部署後的 Web App URL，即可同步資料。');el.syncModal.classList.remove('hidden')}
-function closeSync(){el.syncModal.classList.add('hidden')}
+
+/* ── Sync ── */
+function openSync(){
+  el.sheetUrl.value=sheetUrl;
+  setStatus('貼上 Google Apps Script 部署後的 Web App URL，即可同步資料。');
+  el.syncModal.classList.remove('hidden');
+  requestAnimationFrame(function(){el.syncModal.classList.add('open')});
+}
+function closeSync(){
+  el.syncModal.classList.remove('open');
+  setTimeout(function(){el.syncModal.classList.add('hidden')},280);
+}
 function setStatus(t){el.syncStatus.textContent=t}
-function saveSheetUrl(){sheetUrl=el.sheetUrl.value.trim();localStorage.setItem('tkDiary26SheetUrl',sheetUrl);setStatus(sheetUrl?'同步網址已儲存。':'同步網址已清除。')}
-function needUrl(){if(!sheetUrl)sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';if(!sheetUrl){openSync();setStatus('請先貼上 Apps Script Web App URL。');return ''}return sheetUrl}
+function saveSheetUrl(){
+  sheetUrl=el.sheetUrl.value.trim();
+  localStorage.setItem('tkDiary26SheetUrl',sheetUrl);
+  setStatus(sheetUrl?'同步網址已儲存。':'同步網址已清除。');
+}
+function needUrl(){
+  if(!sheetUrl)sheetUrl=localStorage.getItem('tkDiary26SheetUrl')||'';
+  if(!sheetUrl){openSync();setStatus('請先貼上 Apps Script Web App URL。');return ''}
+  return sheetUrl;
+}
 function payload(){return {version:1,updatedAt:new Date().toISOString(),days:DAYS,data:data}}
-async function syncToSheets(){const url=needUrl();if(!url)return;setStatus('正在上傳資料到 Google Sheets...');try{const r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'save',payload:payload()})});setStatus(await r.text()||'上傳完成。')}catch(e){setStatus('上傳失敗。請確認 Apps Script URL 已部署為任何人皆可存取。')}}
-async function loadFromSheets(){const url=needUrl();if(!url)return;setStatus('正在從 Google Sheets 下載資料...');try{const r=await fetch(url+'?action=load&ts='+Date.now()),j=await r.json(),p=j.payload||j;if(p&&p.data){data=p.data;save();tabs();render();setStatus('已從 Google Sheets 下載並更新畫面。')}else setStatus('Sheets 裡沒有可匯入的日記資料。')}catch(e){setStatus('下載失敗。請確認 Apps Script URL 與部署權限。')}}
-el.entryModal.addEventListener('click',function(e){if(e.target===el.entryModal)closeEntry()});el.syncModal.addEventListener('click',function(e){if(e.target===el.syncModal)closeSync()});
+async function syncToSheets(){
+  var url=needUrl();if(!url)return;
+  setStatus('正在上傳資料到 Google Sheets...');
+  try{
+    var r=await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'save',payload:payload()})});
+    setStatus(await r.text()||'上傳完成。');
+  }catch(e){setStatus('上傳失敗。請確認 Apps Script URL 已部署為任何人皆可存取。')}
+}
+async function loadFromSheets(){
+  var url=needUrl();if(!url)return;
+  setStatus('正在從 Google Sheets 下載資料...');
+  try{
+    var r=await fetch(url+'?action=load&ts='+Date.now()),j=await r.json(),p=j.payload||j;
+    if(p&&p.data){data=p.data;save();tabs();render();setStatus('已從 Google Sheets 下載並更新畫面。')}
+    else setStatus('Sheets 裡沒有可匯入的日記資料。');
+  }catch(e){setStatus('下載失敗。請確認 Apps Script URL 與部署權限。')}
+}
+
+/* ── Modal backdrop click ── */
+el.entryModal.addEventListener('click',function(e){if(e.target===el.entryModal)closeEntry()});
+el.syncModal.addEventListener('click',function(e){if(e.target===el.syncModal)closeSync()});
+
+/* ── Init ── */
 tabs();render();
 </script>
 </body>
